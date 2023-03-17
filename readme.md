@@ -24,10 +24,15 @@ However, when quitting the browser entirely with <kbd>⌘</kbd> <kbd>Q</kbd>, re
 
 ![Screenshot showing the blank embedded iframe](./media/screen2.png)
 
-When taking a closer look to the devtools we see the error
+When taking a closer look at the DevTools we see the error
 
 > Refused to display '' in a frame because of Cross-Origin-Embedder-Policy.
 
 Refreshing the page with DevTools open sometimes fixes the issue. But it seems to only fix it if the `iframe.html` resources is loaded from `Memory Cache`. In the scenario where it's loaded from `Disk Cache`, it seems that the `CORP` header from the resource is not taken into account. This is probably the reason why the behaviour is different when quitting Safari entirely.
 
 ![Screenshot showing resource loaded from disk cache](./media/screen3.png) 
+
+## Additional Information
+
+- COEP is implemented by [cdumez](https://github.com/cdumez) in https://github.com/WebKit/WebKit/commit/e6c7e17d32fa0dd802337c7f0d2c63b0703b782a
+- There seemed to be an issue with the COEP header and script cache hits which was fixed by [cdumez](https://github.com/cdumez) in https://github.com/WebKit/WebKit/pull/5141
